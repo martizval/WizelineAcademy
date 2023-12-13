@@ -4,34 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat GPT</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <form action="/submit" method="post">
-        <label for="weight">weight:</label>
-        <input type="number" id="weight" name="weight" required>
-        <br>
-        <label for="height">height:</label>
-        <input type="number" id="height" name="height" required>
-        <br>
-        <label for="waist_size">waist size:</label>
-        <input type="number" id="waist_size" name="waist_size" required>
-        <br>
-        <label for="age">age:</label>
-        <input type="number" id="age" name="age" required>
-        <br>
-        <label for="hereditary_diseases">hereditary diseases:</label>
-        <input type="text" id="hereditary_diseases" name="hereditary_diseases" required>
-        <br>
-        <label for="personal_diseases">personal diseases:</label>
-        <input type="text" id="personal_diseases" name="personal_diseases" required>
-        <br>
-        <label for="injuries">injuries:</label>
-        <input type="text" id="injuries" name="injuries" required>
-        <br>
-        <label for="country">country:</label>
-        <input type="text" id="country" name="country" required>
-        <br>
-        <button type="submit">Generate rutine</button>
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h2 class="text-center">Rutine for Exercises & Diet</h2>
+                <form action="/submit" method="post">
+                    <div class="form-group">
+                        <label for="weight">Weight:</label>
+                        <input type="number" id="weight" name="weight" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="height">Height:</label>
+                        <input type="number" id="height" name="height" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="waist_size">Waist Size:</label>
+                        <input type="number" id="waist_size" name="waist_size" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" name="age" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="hereditary_diseases">Hereditary Diseases:</label>
+                        <input type="text" id="hereditary_diseases" name="hereditary_diseases" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="personal_diseases">Personal Diseases:</label>
+                        <input type="text" id="personal_diseases" name="personal_diseases" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="injuries">Injuries:</label>
+                        <input type="text" id="injuries" name="injuries" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country:</label>
+                        <input type="text" id="country" name="country" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Generate rutine</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
