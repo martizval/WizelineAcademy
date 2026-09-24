@@ -1,6 +1,6 @@
-# Variables de entorno / secretos
+# environment variables / secrets
 .env
-# Entorno virtual
+# virtual environment
 venv/
 __pycache__/
 *.pyc
