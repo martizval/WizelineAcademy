@@ -1,43 +1,56 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
+from dotenv import load_dotenv
+from openai import OpenAI
 import os
-import datetime
-import openai
 
-os.environ["OPENAI_API_KEY"] = "YOUR_API_KEY"
+# Cargar las variables del archivo .env
+load_dotenv()
 
-# Crear el cliente OpenAI
-client = openai.Client()
+# Obtener la API key de forma segura
+api_key = os.getenv("OPENAI_API_KEY")
+
+if not api_key:
+    raise ValueError("OPENAI_API_KEY no está configurada")
+
+# Crear cliente OpenAI
+client = OpenAI(api_key=api_key)
 
 app = Flask(__name__)
 
+
 def create_workout_and_diet_plan(user_data, model):
-    # Realizar la solicitud de autocompletado
+
     response = client.chat.completions.create(
         model=model,
-        messages=[{
-                    "role": "assistant",
-         "content": "You are an expert in diet and routine exercises."
-    },
+        messages=[
+            {
+                "role": "system",
+                "content": "You are an expert in diet and routine exercises."
+            },
             {
                 "role": "user",
-                "content": f"Create an exercise and diet routine for every day of the week, for a user with the following data: {user_data}"
+                "content": (
+                    "Create an exercise and diet routine for every day "
+                    f"of the week, for a user with the following data: {user_data}"
+                )
             }
         ],
         max_tokens=800,
         n=1,
-        stop=None,
-        temperature=0.7,
+        temperature=0.7
     )
 
-    # Devolver el texto generado
     return response.choices[0].message.content
+
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
+
 @app.route("/submit", methods=["POST"])
 def submit():
+
     weight = request.form["weight"]
     height = request.form["height"]
     waist_size = request.form["waist_size"]
@@ -47,20 +60,47 @@ def submit():
     injuries = request.form["injuries"]
     country = request.form["country"]
 
-    user_data = f"weight: {weight} kg, height: {height} cm, Waist Size: {waist_size} cm, Age: {age} , hereditary diseases: {hereditary_diseases}, personal diseases: {personal_diseases}, Injuries: {injuries}, Country: {country}"
+    user_data = (
+        f"weight: {weight} kg, "
+        f"height: {height} cm, "
+        f"waist size: {waist_size} cm, "
+        f"age: {age}, "
+        f"hereditary diseases: {hereditary_diseases}, "
+        f"personal diseases: {personal_diseases}, "
+        f"injuries: {injuries}, "
+        f"country: {country}"
+    )
 
-    workout_and_diet_plan = create_workout_and_diet_plan(user_data, "gpt-3.5-turbo-1106")
+    # Generar el plan usando el modelo que ya tenías
+    workout_and_diet_plan = create_workout_and_diet_plan(
+        user_data,
+        "gpt-3.5-turbo-1106"
+    )
 
-    # Crear un nombre de archivo único basado en la fecha y hora actuales
-    now = datetime.datetime.now()
-    file_name = f"{now.strftime('%Y-%m-%d-%H-%M-%S')}.txt"
+    # Mostrar el resultado directamente en HTML
+    return render_template(
+        "result.html",
+        workout_and_diet_plan=workout_and_diet_plan
+    )
 
-    # Escribir el resultado en un archivo txt
-    with open(file_name, "w") as f:
-        f.write(workout_and_diet_plan)
-
-    # Redirigir al usuario a la página principal
-    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+# if __name__ == "__main__":
+#     response = client.chat.completions.create(
+#         model="gpt-3.5-turbo-1106",
+#         messages=[
+#             {
+#                 "role": "system",
+#                 "content": "You are a helpful assistant."
+#             },
+#             {
+#                 "role": "user",
+#                 "content": "Say hello in Spanish."
+#             }
+#         ],
+#         max_tokens=50
+#     )
+
+#     print(response.choices[0].message.content)
