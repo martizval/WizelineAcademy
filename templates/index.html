@@ -1,154 +1,134 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Exercise & Diet Planner</title>
 
     <link
-        rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    >
-</head>
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
 
-<body>
-
-<div class="container mt-5">
-
-    <div class="row">
-
+  <body>
+    <div class="container mt-5">
+      <div class="row">
         <div class="col-md-6 offset-md-3">
+          <h2 class="text-center mb-4">Routine for Exercises & Diet</h2>
 
-            <h2 class="text-center mb-4">
-                Routine for Exercises & Diet
-            </h2>
+          <form action="{{ url_for('submit') }}" method="post">
+            <div class="form-group">
+              <label for="weight">Weight (kg):</label>
+              <input
+                type="number"
+                id="weight"
+                name="weight"
+                class="form-control"
+                min="1"
+                required
+              />
+            </div>
 
-            <form action="{{ url_for('submit') }}" method="post">
+            <div class="form-group">
+              <label for="height">Height (cm):</label>
+              <input
+                type="number"
+                id="height"
+                name="height"
+                class="form-control"
+                min="1"
+                required
+              />
+            </div>
 
-                <div class="form-group">
-                    <label for="weight">Weight (kg):</label>
-                    <input
-                        type="number"
-                        id="weight"
-                        name="weight"
-                        class="form-control"
-                        min="1"
-                        required
-                    >
-                </div>
+            <div class="form-group">
+              <label for="waist_size">Waist Size (cm):</label>
+              <input
+                type="number"
+                id="waist_size"
+                name="waist_size"
+                class="form-control"
+                min="1"
+                required
+              />
+            </div>
 
-                <div class="form-group">
-                    <label for="height">Height (cm):</label>
-                    <input
-                        type="number"
-                        id="height"
-                        name="height"
-                        class="form-control"
-                        min="1"
-                        required
-                    >
-                </div>
+            <div class="form-group">
+              <label for="age">Age:</label>
+              <input
+                type="number"
+                id="age"
+                name="age"
+                class="form-control"
+                min="1"
+                max="120"
+                required
+              />
+            </div>
 
-                <div class="form-group">
-                    <label for="waist_size">Waist Size (cm):</label>
-                    <input
-                        type="number"
-                        id="waist_size"
-                        name="waist_size"
-                        class="form-control"
-                        min="1"
-                        required
-                    >
-                </div>
+            <div class="form-group">
+              <label for="hereditary_diseases"> Hereditary Diseases: </label>
 
-                <div class="form-group">
-                    <label for="age">Age:</label>
-                    <input
-                        type="number"
-                        id="age"
-                        name="age"
-                        class="form-control"
-                        min="1"
-                        max="120"
-                        required
-                    >
-                </div>
+              <input
+                type="text"
+                id="hereditary_diseases"
+                name="hereditary_diseases"
+                class="form-control"
+                placeholder="Example: Diabetes, hypertension, none..."
+                required
+              />
+            </div>
 
-                <div class="form-group">
-                    <label for="hereditary_diseases">
-                        Hereditary Diseases:
-                    </label>
+            <div class="form-group">
+              <label for="personal_diseases"> Personal Diseases: </label>
 
-                    <input
-                        type="text"
-                        id="hereditary_diseases"
-                        name="hereditary_diseases"
-                        class="form-control"
-                        placeholder="Example: Diabetes, hypertension, none..."
-                        required
-                    >
-                </div>
+              <input
+                type="text"
+                id="personal_diseases"
+                name="personal_diseases"
+                class="form-control"
+                placeholder="Example: Asthma, diabetes, none..."
+                required
+              />
+            </div>
 
-                <div class="form-group">
-                    <label for="personal_diseases">
-                        Personal Diseases:
-                    </label>
+            <div class="form-group">
+              <label for="injuries"> Injuries: </label>
 
-                    <input
-                        type="text"
-                        id="personal_diseases"
-                        name="personal_diseases"
-                        class="form-control"
-                        placeholder="Example: Asthma, diabetes, none..."
-                        required
-                    >
-                </div>
+              <input
+                type="text"
+                id="injuries"
+                name="injuries"
+                class="form-control"
+                placeholder="Example: Knee injury, none..."
+                required
+              />
+            </div>
 
-                <div class="form-group">
-                    <label for="injuries">
-                        Injuries:
-                    </label>
+            <div class="form-group">
+              <label for="country">Country:</label>
+              <select id="country" name="country" class="form-control" required>
+                <option value="">Select your country</option>
+                <option value="Peru">Peru</option>
+                <option value="Colombia">Colombia</option>
+                <option value="Mexico">Mexico</option>
+                <option value="Chile">Chile</option>
+                <option value="Argentina">Argentina</option>
+                <option value="Ecuador">Ecuador</option>
+                <option value="Bolivia">Bolivia</option>
+                <option value="Spain">Spain</option>
+                <option value="United States">United States</option>
+              </select>
+            </div>
 
-                    <input
-                        type="text"
-                        id="injuries"
-                        name="injuries"
-                        class="form-control"
-                        placeholder="Example: Knee injury, none..."
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="country">
-                        Country:
-                    </label>
-
-                    <input
-                        type="text"
-                        id="country"
-                        name="country"
-                        class="form-control"
-                        required
-                    >
-                </div>
-
-                <button
-                    type="submit"
-                    class="btn btn-primary btn-block"
-                >
-                    Generate Routine
-                </button>
-
-            </form>
-
+            <button type="submit" class="btn btn-primary btn-block">
+              Generate Routine
+            </button>
+          </form>
         </div>
-
+      </div>
     </div>
-
-</div>
-
-</body>
+  </body>
 </html>
